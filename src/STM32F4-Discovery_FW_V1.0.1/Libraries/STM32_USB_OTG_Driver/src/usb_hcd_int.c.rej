@@ -1,0 +1,27 @@
+--- Libraries/STM32_USB_OTG_Driver/src/usb_hcd_int.c
++++ Libraries/STM32_USB_OTG_Driver/src/usb_hcd_int.c
+@@ -21,6 +21,7 @@
+ 
+ /* Includes ------------------------------------------------------------------*/
+ #include "usb_core.h"
++#include "usb_bsp.h"
+ #include "usb_defines.h"
+ #include "usb_hcd_int.h"
+ 
+@@ -431,7 +432,7 @@
+   }
+   if (do_reset)
+   {
+-    USB_OTG_ResetPort(pdev);
++    USB_OTG_ResetPort_I(pdev);
+     
+   }
+   /* Clear Port Interrupts */
+@@ -710,6 +711,7 @@
+              (hcchar.b.eptype == EP_TYPE_BULK))
+     {
+       /* re-activate the channel  */
++      CLEAR_HC_INT(hcreg , nak);   			// else may never return to user code
+       hcchar.b.chen = 1;
+       hcchar.b.chdis = 0;
+       USB_OTG_WRITE_REG32(&pdev->regs.HC_REGS[num]->HCCHAR, hcchar.d32); 

@@ -1,0 +1,19 @@
+--- Libraries/STM32_USB_HOST_Library/Core/src/usbh_ioreq.c
++++ Libraries/STM32_USB_HOST_Library/Core/src/usbh_ioreq.c
+@@ -112,6 +112,7 @@
+   {
+   case CMD_SEND:
+     /* Start a SETUP transfer */
++    pdev->host.hc[phost->Control.hc_num_out].toggle_out = 0;	// my fix
+     USBH_SubmitSetupRequest(phost, buff, length);
+     phost->RequestState = CMD_WAIT;
+     status = USBH_BUSY;
+@@ -307,7 +308,7 @@
+   */
+ USBH_Status USBH_InterruptReceiveData( USB_OTG_CORE_HANDLE *pdev, 
+                                 uint8_t *buff, 
+-                                uint8_t length,
++                                uint16_t length,
+                                 uint8_t hc_num)
+ {
+ 

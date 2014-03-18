@@ -1,0 +1,11 @@
+--- Libraries/STM32_USB_HOST_Library/Core/inc/usbh_ioreq.h
++++ Libraries/STM32_USB_HOST_Library/Core/inc/usbh_ioreq.h
+@@ -105,7 +105,7 @@
+ 
+ USBH_Status USBH_InterruptReceiveData( USB_OTG_CORE_HANDLE *pdev, 
+                                        uint8_t             *buff, 
+-                                       uint8_t             length,
++                                       uint16_t             length,
+                                        uint8_t             hc_num);
+ 
+ USBH_Status USBH_InterruptSendData( USB_OTG_CORE_HANDLE *pdev, 

@@ -1,0 +1,18 @@
+--- Libraries/STM32_USB_OTG_Driver/inc/usb_bsp.h
++++ Libraries/STM32_USB_OTG_Driver/inc/usb_bsp.h
+@@ -25,7 +25,6 @@
+ 
+ /* Includes ------------------------------------------------------------------*/
+ #include "usb_core.h"
+-#include "stm32f4_discovery.h"
+ 
+ /** @addtogroup USB_OTG_DRIVER
+   * @{
+@@ -80,6 +79,7 @@
+ void USB_OTG_BSP_ConfigVBUS(USB_OTG_CORE_HANDLE *pdev);
+ void USB_OTG_BSP_DriveVBUS(USB_OTG_CORE_HANDLE *pdev,uint8_t state);
+ #endif
++void USB_OTG_ResetPort_I(USB_OTG_CORE_HANDLE *pdev);
+ /**
+   * @}
+   */ 

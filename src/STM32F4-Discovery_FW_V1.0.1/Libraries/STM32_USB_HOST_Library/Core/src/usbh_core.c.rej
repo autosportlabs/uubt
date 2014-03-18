@@ -1,0 +1,13 @@
+--- Libraries/STM32_USB_HOST_Library/Core/src/usbh_core.c
++++ Libraries/STM32_USB_HOST_Library/Core/src/usbh_core.c
+@@ -714,6 +714,10 @@
+     { 
+       /* Nack received from device */
+       phost->Control.state = CTRL_DATA_OUT;
++      // according to usb 2.0, [8.6.3, fig. 8-46]
++      //  preserve data phase while retrying nak'ed
++      //  so toggle it twice:
++      pdev->host.hc[phost->Control.hc_num_out].toggle_out ^= 1;
+     }    
+     else if (URB_Status == URB_ERROR)
+     {
